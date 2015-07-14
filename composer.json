@@ -20,7 +20,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "BankServer": ["src/"]
+            "BankServer\\": ["src/"]
         }
     },
     "autoload-dev": {

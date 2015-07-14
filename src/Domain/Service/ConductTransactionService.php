@@ -14,6 +14,7 @@ class ConductTransactionService
 	protected $userRepository;
 	protected $cardRepository;
 
+	protected $token;
 	protected $lastError;
 
 	public function __construct(
@@ -45,10 +46,13 @@ class ConductTransactionService
 			]);
 
 			if ($user) {
+				$token = str_random(10);
+				$this->setToken($token);
+
 				$transaction = new Transaction;
 				$transaction->setCardId($card->id);
 				$transaction->setStatus(Transaction::STATUS_NEW);
-				$transaction->setToken(str_random(10));
+				$transaction->setToken($this->getToken());
 
 				$this->transactionRepository->persist($transaction);
 
@@ -92,6 +96,18 @@ class ConductTransactionService
 		$this->cardRepository->persist($card);
 
 		return true;
+	}
+
+	protected function setToken($token)
+	{
+		$this->token = $token;
+
+		return $this;
+	}
+
+	public function getToken()
+	{
+		return $this->token;
 	}
 
 	protected function setLastError($lastError)

@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/transaction/authenticate', 'TransactionController@authenticate');
-Route::get('/transaction/bill', 'TransactionController@bill');
+Route::post('/transaction/authenticate', 'TransactionController@authenticate');
+Route::post('/transaction/bill', 'TransactionController@bill');
 
 Route::get('/', function () {
     return view('welcome');

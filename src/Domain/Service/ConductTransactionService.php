@@ -4,6 +4,8 @@ namespace BankServer\Domain\Service;
 
 use BankServer\Domain\Contract\HttpBankServerInterface;
 use BankServer\Domain\Repository\TransactionRepositoryInterface;
+use BankServer\Domain\Repository\UserRepositoryInterface;
+use BankServer\Domain\Repository\CardRepositoryInterface;
 use BankServer\Domain\Entity\Transaction;
 use BankServer\Domain\Entity\User;
 use BankServer\Domain\Entity\Card;
@@ -38,19 +40,21 @@ class ConductTransactionService
 			'card_expiration' => $cardExpiration,
 		]);
 
-		if ($card) {
+		if (!empty($card)) {
+			$card = $card[0];
 			$user = $this->userRepository->getBy([
-				'id' => $card->user_id,
+				'id' => $card->getUserId(),
 				'first_name' => $firstName,
 				'last_name' => $lastName,
 			]);
 
-			if ($user) {
+			if (!empty($user)) {
+				$user = $user[0];
 				$token = str_random(10);
 				$this->setToken($token);
 
 				$transaction = new Transaction;
-				$transaction->setCardId($card->id);
+				$transaction->setCardId($card->getId());
 				$transaction->setStatus(Transaction::STATUS_NEW);
 				$transaction->setToken($this->getToken());
 

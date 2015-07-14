@@ -42,12 +42,12 @@ implements RepositoryInterface
 		$model = $this->model;
 
 		foreach ($criterias as $criteria => $value) {
-			$model->where($criteria, '=', $value);
+			$model = $model->where($criteria, '=', $value);
 		}
 
-		$result = $model->get();
+		$resultSet = $model->get();
 
-		if (!$result) {
+		if (!$resultSet) {
 			return false;
 		}
 

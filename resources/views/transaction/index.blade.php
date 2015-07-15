@@ -11,9 +11,7 @@
 @section('content')
 	<div class="widget widget-table">
 		<div class="widget-header">
-			<h3><i class="fa fa-table"></i> Transactions Table
-				<a class="btn btn-info" href="/transaction/create"><span class="glyphicon glyphicon-plus "></span> Create New Transaction</a>
-			</h3>
+			<h3><i class="fa fa-table"></i> Transactions Table</h3>
 			<div class="btn-group widget-header-toolbar">
 			</div>
 		</div>

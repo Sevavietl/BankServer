@@ -147,6 +147,8 @@ return [
         App\Providers\ConductTransactionServiceProvider::class,
         App\Providers\HydratorServiceProvider::class,
 
+        'Caffeinated\Menus\MenusServiceProvider',
+
     ],
 
     /*
@@ -194,6 +196,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'Menu'      => 'Caffeinated\Menus\Facades\Menu',
 
     ],
 

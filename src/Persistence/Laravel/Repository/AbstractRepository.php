@@ -53,7 +53,7 @@ implements RepositoryInterface
 
 		$results = [];
 		foreach ($resultSet as $result) {
-			$results[] = $this->hydrator->insert($this->entity, $result->toArray());
+			$results[] = $this->hydrator->insert(clone $this->entity, $result->toArray());
 		}
 
 		return $results;
@@ -70,7 +70,7 @@ implements RepositoryInterface
 
 		$results = [];
 		foreach ($resultSet as $result) {
-			$results[] = $this->hydrator->insert($this->entity, $result->toArray());
+			$results[] = $this->hydrator->insert(clone $this->entity, $result->toArray());
 		}
 
 		return $results;

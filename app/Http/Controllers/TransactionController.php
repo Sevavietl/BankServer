@@ -9,15 +9,28 @@ use App\Http\Requests;
 use App\User;
 
 use BankServer\Domain\Service\ConductTransactionService;
+use BankServer\Domain\Repository\TransactionRepositoryInterface;
 
 class TransactionController extends Controller
 {
     protected $transactionService;
+    protected $repository;
 
     public function __construct(
-        ConductTransactionService $transactionService
+        ConductTransactionService $transactionService,
+        TransactionRepositoryInterface $repository
     ){
         $this->transactionService = $transactionService;
+        $this->repository = $repository;
+
+        $this->middleware('menu', ['only' => 'index']);
+    }
+
+    public function index()
+    {
+        $transactions = $this->repository->getAll();
+
+        return view('transaction.index')->with(compact('transactions'));
     }
 
     public function authenticate(Request $request)

@@ -84,6 +84,8 @@ class ConductTransactionService
 			return false;
 		}
 
+		$transaction = $transaction[0];
+
 		$card = $this->cardRepository->getById($transaction->getCardId());
 
 		if ($card->getBalance() < $amount) {

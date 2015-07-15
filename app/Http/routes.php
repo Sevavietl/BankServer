@@ -11,9 +11,10 @@
 |
 */
 
+Route::resource('transaction', 'TransactionController');
 Route::post('/transaction/authenticate', 'TransactionController@authenticate');
 Route::post('/transaction/bill', 'TransactionController@bill');
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('transaction');
 });

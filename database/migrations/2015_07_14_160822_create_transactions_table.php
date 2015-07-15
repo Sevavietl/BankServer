@@ -16,7 +16,7 @@ class CreateTransactionsTable extends Migration
             $table->increments('id');
             $table->integer('card_id')->unsigned();
             $table->foreign('card_id')->references('id')->on('cards');
-            $table->string('amount')->nullable();
+            $table->integer('amount')->nullable();
             $table->string('status');
             $table->string('token')->nullable();
             $table->timestamps();

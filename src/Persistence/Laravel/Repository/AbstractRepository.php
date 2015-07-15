@@ -13,8 +13,20 @@ use DB;
 abstract class AbstractRepository
 implements RepositoryInterface
 {
+	/**
+	 * [$model description]
+	 * @var Illuminate\Database\Eloquent\Model
+	 */
 	protected $model;
+	/**
+	 * [$hydrator description]
+	 * @var BankServer\Persistence\Laravel\Hydrator\HydratorInterface
+	 */
 	protected $hydrator;
+	/**
+	 * [$entity description]
+	 * @var BankServer\Domain\Entity\AbstractEntity
+	 */
 	protected $entity;
 
 	public function __construct(
@@ -27,6 +39,11 @@ implements RepositoryInterface
 		$this->entity = $entity;
 	}
 
+	/**
+	 * Get entity by id
+	 * @param  integer $id
+	 * @return BankServer\Domain\Entity\AbstractEntity
+	 */
 	public function getById($id)
 	{
 		$model = $this->model;
@@ -37,6 +54,11 @@ implements RepositoryInterface
 			: false;
 	}
 
+	/**
+	 * Get by criterias
+	 * @param  array  $criterias
+	 * @return array
+	 */
 	public function getBy(array $criterias)
 	{
 		$model = $this->model;
@@ -59,6 +81,10 @@ implements RepositoryInterface
 		return $results;
 	}
 
+	/**
+	 * Get all entities
+	 * @return array
+	 */
 	public function getAll()
 	{
 		$model = $this->model;
@@ -76,6 +102,11 @@ implements RepositoryInterface
 		return $results;
 	}
 
+	/**
+	 * Store or update entity
+	 * @param  BankServer\Domain\Entity\AbstractEntity $entity
+	 * @return BankServer\Domain\Entity\AbstractEntity
+	 */
 	public function persist(AbstractEntity $entity)
 	{
 		$data = $this->hydrator->extract($entity);
@@ -112,6 +143,11 @@ implements RepositoryInterface
 		return $this;
 	}
 
+	/**
+	 * If entity exists in the table
+	 * @param  BankServer\Domain\Entity\AbstractEntity $entity
+	 * @return boolean
+	 */
 	protected function hasIdentity(AbstractEntity $entity)
 	{
 		return !empty($entity->getId());
